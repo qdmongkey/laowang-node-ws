@@ -1,722 +1,978 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>牙齿保护指南 - 健康口腔，幸福生活</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#36D399',
+            accent: '#FF9F43',
+            neutral: {
+              100: '#F8FAFC',
+              200: '#E2E8F0',
+              300: '#CBD5E1',
+              700: '#334155',
+              800: '#1E293B',
+              900: '#0F172A'
             }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义样式 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-navbar {
+        transition: background-color 0.3s, box-shadow 0.3s, padding 0.3s;
+      }
+      .scroll-indicator {
+        height: 3px;
+        background-color: theme('colors.secondary');
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: 0%;
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+<body class="font-inter bg-neutral-100 text-neutral-800 overflow-x-hidden">
+  <!-- 滚动进度指示器 -->
+  <div class="scroll-indicator" id="scrollIndicator"></div>
+  
+  <!-- 导航栏 -->
+  <nav id="navbar" class="fixed w-full z-40 transition-navbar py-4 bg-transparent">
+    <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+      <a href="#" class="flex items-center gap-2">
+        <i class="fa fa-tooth text-primary text-2xl"></i>
+        <span class="text-xl font-bold text-white text-shadow">护牙指南</span>
+      </a>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#importance" class="text-white hover:text-secondary transition-colors">为何重要</a>
+        <a href="#habits" class="text-white hover:text-secondary transition-colors">日常习惯</a>
+        <a href="#diet" class="text-white hover:text-secondary transition-colors">饮食建议</a>
+        <a href="#checkup" class="text-white hover:text-secondary transition-colors">定期检查</a>
+        <a href="#faq" class="text-white hover:text-secondary transition-colors">常见问题</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menuBtn" class="md:hidden text-white text-xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full">
+      <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+        <a href="#importance" class="text-neutral-800 hover:text-primary transition-colors py-2 border-b border-neutral-200">为何重要</a>
+        <a href="#habits" class="text-neutral-800 hover:text-primary transition-colors py-2 border-b border-neutral-200">日常习惯</a>
+        <a href="#diet" class="text-neutral-800 hover:text-primary transition-colors py-2 border-b border-neutral-200">饮食建议</a>
+        <a href="#checkup" class="text-neutral-800 hover:text-primary transition-colors py-2 border-b border-neutral-200">定期检查</a>
+        <a href="#faq" class="text-neutral-800 hover:text-primary transition-colors py-2">常见问题</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- 英雄区域 -->
+  <header class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://picsum.photos/id/1080/1920/1080" alt="健康牙齿" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-primary/60"></div>
+    </div>
+    <div class="container mx-auto px-4 md:px-6 relative z-10 text-center">
+      <h1 class="text-[clamp(2.5rem,6vw,4.5rem)] font-bold text-white leading-tight mb-6 animate-fade-in">
+        保护牙齿，<br class="md:hidden">守护健康
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 max-w-2xl mx-auto mb-10">
+        拥有健康的牙齿不仅让你笑容更灿烂，更能提升生活质量。了解科学的护牙知识，从今天开始改变。
+      </p>
+      <a href="#importance" class="inline-block bg-secondary hover:bg-secondary/90 text-white font-medium px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-lg">
+        开始了解 <i class="fa fa-arrow-down ml-2"></i>
+      </a>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+      <i class="fa fa-angle-down text-3xl"></i>
+    </div>
+  </header>
+
+  <main>
+    <!-- 为什么保护牙齿重要 -->
+    <section id="importance" class="py-20 bg-white">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">为什么保护牙齿如此重要？</h2>
+          <p class="text-neutral-600 max-w-2xl mx-auto">牙齿健康不仅关系到口腔，更与全身健康息息相关</p>
         </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- 卡片1 -->
+          <div class="bg-neutral-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+              <i class="fa fa-heartbeat text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">全身健康关联</h3>
+            <p class="text-neutral-600">研究表明，牙周疾病可能与心脏病、糖尿病等全身性疾病相关。保持口腔健康有助于降低这些疾病的风险。</p>
+          </div>
+          
+          <!-- 卡片2 -->
+          <div class="bg-neutral-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+              <i class="fa fa-cutlery text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">咀嚼与消化</h3>
+            <p class="text-neutral-600">健康的牙齿能有效咀嚼食物，帮助消化吸收。牙齿问题会导致咀嚼困难，影响营养摄入和消化系统健康。</p>
+          </div>
+          
+          <!-- 卡片3 -->
+          <div class="bg-neutral-100 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow group">
+            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+              <i class="fa fa-smile-o text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">自信与社交</h3>
+            <p class="text-neutral-600">健康美观的牙齿能提升自信心，让人更愿意展现笑容，积极参与社交活动，对个人职业发展也有积极影响。</p>
+          </div>
+        </div>
+        
+        <!-- 统计数据 -->
+        <div class="mt-20 bg-primary/5 rounded-2xl p-8 md:p-12">
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <h3 class="text-2xl font-bold mb-4">令人担忧的口腔健康数据</h3>
+              <p class="text-neutral-600 mb-6">根据最新口腔健康调查，我国成人龋齿患病率高达90%以上，牙周健康率不足15%，多数人缺乏正确的口腔护理知识。</p>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3">
+                  <i class="fa fa-check-circle text-secondary mt-1"></i>
+                  <span>超过60%的人每天刷牙次数不足2次</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa fa-check-circle text-secondary mt-1"></i>
+                  <span>仅不到10%的人会定期使用牙线</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa fa-check-circle text-secondary mt-1"></i>
+                  <span>约70%的人超过2年未进行口腔检查</span>
+                </li>
+              </ul>
+            </div>
+            <div class="h-64 md:h-80">
+              <canvas id="dentalChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    
+    <!-- 日常护牙习惯 -->
+    <section id="habits" class="py-20 bg-neutral-100">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">建立健康的日常护牙习惯</h2>
+          <p class="text-neutral-600 max-w-2xl mx-auto">从小事做起，培养良好的口腔护理习惯，预防胜于治疗</p>
         </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 习惯1 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1071/600/400" alt="正确刷牙" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">1</span>
+                正确刷牙
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>每天至少刷牙两次，每次2分钟</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>采用45度角轻柔刷牙，不要用力过猛</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>选择含氟牙膏和软毛牙刷</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 习惯2 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1059/600/400" alt="使用牙线" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">2</span>
+                使用牙线清洁
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>每天至少使用一次牙线清洁牙缝</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>正确方法是围绕每颗牙齿形成"C"形</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>牙线可有效清除牙刷无法触及的食物残渣</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 习惯3 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1060/600/400" alt="使用漱口水" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">3</span>
+                使用漱口水
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>选择含氟漱口水，帮助预防龋齿</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>刷牙和使用牙线后使用，不要立即漱口</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>注意不要吞咽漱口水，尤其是儿童</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 习惯4 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1066/600/400" alt="更换牙刷" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">4</span>
+                定期更换牙刷
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>每3个月更换一次牙刷或牙刷头</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>刷毛变形或使用后应立即更换</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>选择适合自己口腔情况的牙刷类型</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 习惯5 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1058/600/400" alt="清洁舌头" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">5</span>
+                清洁舌头
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>每天刷牙后清洁舌头，减少细菌滋生</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>使用舌刮器或牙刷背面轻轻擦拭</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>从舌头后部向前轻轻刮擦，重复几次</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 习惯6 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+            <div class="h-48 overflow-hidden">
+              <img src="https://picsum.photos/id/1057/600/400" alt="口腔防护" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 flex items-center">
+                <span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center mr-3 text-primary">6</span>
+                运动时保护
+              </h3>
+              <ul class="text-neutral-600 space-y-2">
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>进行接触性运动时佩戴口腔保护器</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>避免用牙齿开瓶或咬硬物</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="fa fa-angle-right text-primary mt-1"></i>
+                  <span>如有牙齿敏感，避免极冷极热食物</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- 饮食与牙齿健康 -->
+    <section id="diet" class="py-20 bg-white">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">饮食与牙齿健康</h2>
+          <p class="text-neutral-600 max-w-2xl mx-auto">合理的饮食习惯是维持口腔健康的重要因素</p>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+        
+        <div class="grid md:grid-cols-2 gap-16 items-center mb-20">
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-primary">有益牙齿的食物</h3>
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/100/100" alt="乳制品" class="w-full h-full object-cover">
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">乳制品</h4>
+                  <p class="text-neutral-600">牛奶、奶酪和酸奶富含钙和磷，有助于强化牙齿珐琅质，中和口腔酸性。</p>
                 </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/101/100" alt=" crunchy蔬菜" class="w-full h-full object-cover">
                 </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">脆爽蔬菜</h4>
+                  <p class="text-neutral-600">胡萝卜、芹菜等脆爽蔬菜需要充分咀嚼，能刺激唾液分泌，帮助清洁牙齿。</p>
                 </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/102/100" alt="坚果" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">坚果</h4>
+                  <p class="text-neutral-600"> almonds、核桃等富含钙、磷和维生素，有助于牙齿健康，但要注意避免咬过硬的坚果。</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/103/100" alt="绿茶" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">绿茶</h4>
+                  <p class="text-neutral-600">含有抗菌和抗炎化合物，有助于减少牙菌斑和牙龈炎症。</p>
+                </div>
+              </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-accent">应限制的食物</h3>
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/104/100" alt=" sugary食物" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">高糖食物</h4>
+                  <p class="text-neutral-600">糖果、蛋糕等含糖食物会被口腔细菌分解产生酸性物质，腐蚀牙齿珐琅质。</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/105/100" alt="酸性饮料" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">酸性饮料</h4>
+                  <p class="text-neutral-600">碳酸饮料、果汁和运动饮料酸性强，会直接侵蚀牙齿表面，导致敏感和蛀牙。</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/106/100" alt="干燥食物" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">干燥和粘性食物</h4>
+                  <p class="text-neutral-600">薯片、干果等干燥或粘性食物容易残留在牙缝中，长时间停留会增加蛀牙风险。</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="https://picsum.photos/id/1080/107/100" alt="冰块" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg mb-1">冰块</h4>
+                  <p class="text-neutral-600">咬硬冰块可能导致牙齿裂纹或破损，尤其是已有填充物的牙齿。</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+        
+        <!-- 饮食小贴士 -->
+        <div class="bg-neutral-100 rounded-2xl p-8 md:p-10">
+          <h3 class="text-2xl font-bold mb-6 text-center">健康饮食小贴士</h3>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+              <div class="text-primary text-3xl mb-4">
+                <i class="fa fa-tint"></i>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">多喝水</h4>
+              <p class="text-neutral-600">饭后喝水可以帮助冲洗食物残渣，中和口腔酸性，尤其是饮用含氟水有助于强化牙齿。</p>
+            </div>
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+              <div class="text-primary text-3xl mb-4">
+                <i class="fa fa-clock-o"></i>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">控制进食频率</h4>
+              <p class="text-neutral-600">频繁 snacking 会使牙齿长时间处于酸性环境中，增加蛀牙风险，尽量集中时间进食。</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+              <div class="text-primary text-3xl mb-4">
+                <i class="fa fa-balance-scale"></i>
+              </div>
+              <h4 class="font-semibold text-lg mb-2">均衡饮食</h4>
+              <p class="text-neutral-600">保证充足的维生素C、钙、磷等营养素摄入，有助于维持牙龈健康和牙齿结构。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 定期检查的重要性 -->
+    <section id="checkup" class="py-20 bg-primary/5">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">定期口腔检查的重要性</h2>
+          <p class="text-neutral-600 max-w-2xl mx-auto">许多口腔问题在早期没有明显症状，定期检查可以及早发现和治疗</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div>
+            <img src="https://picsum.photos/id/1080/800/600" alt="口腔检查" class="w-full h-auto rounded-2xl shadow-lg">
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-bold mb-6">为什么需要定期检查？</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fa fa-search text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg">早期发现问题</h4>
+                  <p class="text-neutral-600">牙医能发现肉眼难以察觉的早期龋齿和牙周问题，及时处理可避免更严重的治疗。</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fa fa-shield text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg">预防为主</h4>
+                  <p class="text-neutral-600">专业清洁能去除日常口腔护理无法清除的牙菌斑和牙结石，预防牙龈炎和牙周病。</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fa fa-eye text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg">口腔癌筛查</h4>
+                  <p class="text-neutral-600">定期检查包括口腔癌筛查，早期发现和治疗能显著提高治愈率和生存率。</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fa fa-lightbulb-o text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-lg">获取专业建议</h4>
+                  <p class="text-neutral-600">牙医可以根据个人情况提供个性化的口腔护理建议，改进日常清洁方法。</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <p class="font-semibold text-lg mb-2">建议检查频率：</p>
+              <ul class="space-y-2 text-neutral-600">
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-primary"></i>
+                  <span>健康成年人：每6个月一次</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-primary"></i>
+                  <span>高风险人群（吸烟者、糖尿病患者等）：每3-4个月一次</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa fa-check-circle text-primary"></i>
+                  <span>儿童：建议每3-6个月检查一次，便于早期发现问题</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 常见牙科治疗 -->
+        <div>
+          <h3 class="text-2xl font-bold mb-8 text-center">常见牙科治疗项目</h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-stethoscope text-primary text-2xl"></i>
+              </div>
+              <h4 class="font-semibold mb-2">常规检查</h4>
+              <p class="text-neutral-600 text-sm">包括口腔检查、X光检查和专业洁牙</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-wrench text-primary text-2xl"></i>
+              </div>
+              <h4 class="font-semibold mb-2">龋齿修复</h4>
+              <p class="text-neutral-600 text-sm">补牙、嵌体、高嵌体等龋齿治疗</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-user-md text-primary text-2xl"></i>
+              </div>
+              <h4 class="font-semibold mb-2">牙周治疗</h4>
+              <p class="text-neutral-600 text-sm">牙龈炎和牙周炎的诊断与治疗</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-smile-o text-primary text-2xl"></i>
+              </div>
+              <h4 class="font-semibold mb-2">美容修复</h4>
+              <p class="text-neutral-600 text-sm">牙齿美白、 veneers、牙冠等美学修复</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 常见问题 -->
+    <section id="faq" class="py-20 bg-white">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">常见问题解答</h2>
+          <p class="text-neutral-600 max-w-2xl mx-auto">解答您关于口腔健康的疑惑</p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+          <div class="space-y-4">
+            <!-- FAQ 项目1 -->
+            <div class="border border-neutral-200 rounded-xl overflow-hidden">
+              <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                <span class="font-semibold text-lg">每天应该刷几次牙？每次刷多久？</span>
+                <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden p-6 pt-0 border-t border-neutral-200">
+                <p class="text-neutral-600">理想情况下，每天应该刷牙至少两次，分别在早晨起床后和晚上睡觉前。每次刷牙应持续至少2分钟，确保清洁到口腔的每一个区域。对于容易蛀牙的人群，饭后也可以增加一次刷牙，但要注意避免过度刷牙导致牙龈损伤。</p>
+              </div>
+            </div>
+            
+            <!-- FAQ 项目2 -->
+            <div class="border border-neutral-200 rounded-xl overflow-hidden">
+              <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                <span class="font-semibold text-lg">电动牙刷比手动牙刷更好吗？</span>
+                <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden p-6 pt-0 border-t border-neutral-200">
+                <p class="text-neutral-600">研究表明，高质量的电动牙刷（尤其是声波或旋转式）在去除牙菌斑方面可能比手动牙刷更有效，特别是对于手部灵活性受限的人群。但关键在于正确的使用方法，无论选择哪种牙刷，只要使用得当，都能有效清洁牙齿。选择时应根据个人偏好、口腔状况和预算来决定。</p>
+              </div>
+            </div>
+            
+            <!-- FAQ 项目3 -->
+            <div class="border border-neutral-200 rounded-xl overflow-hidden">
+              <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                <span class="font-semibold text-lg">牙龈出血是否意味着有问题？</span>
+                <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden p-6 pt-0 border-t border-neutral-200">
+                <p class="text-neutral-600">牙龈出血通常不是正常现象，可能是牙龈炎的早期信号，主要由牙菌斑积累引起。如果偶尔轻微出血，改善口腔卫生习惯后可能会好转。但如果经常出血或出血量较大，可能表明存在更严重的牙周问题，应及时就医检查。忽视牙龈出血可能导致牙周病加重，甚至牙齿松动。</p>
+              </div>
+            </div>
+            
+            <!-- FAQ 项目4 -->
+            <div class="border border-neutral-200 rounded-xl overflow-hidden">
+              <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                <span class="font-semibold text-lg">儿童应该从几岁开始使用含氟牙膏？</span>
+                <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden p-6 pt-0 border-t border-neutral-200">
+                <p class="text-neutral-600">根据最新指南，儿童从第一颗牙齿萌出就可以使用含氟牙膏。对于0-3岁的幼儿，每次使用米粒大小的含氟牙膏（约0.1毫克氟）；3-6岁的儿童，每次使用豌豆大小的含氟牙膏（约0.25毫克氟）；6岁以上儿童可以使用常规用量（约0.5-1毫克氟）。家长应协助儿童刷牙，教导他们吐出牙膏而不是吞咽。</p>
+              </div>
+            </div>
+            
+            <!-- FAQ 项目5 -->
+            <div class="border border-neutral-200 rounded-xl overflow-hidden">
+              <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                <span class="font-semibold text-lg">牙齿敏感应该如何处理？</span>
+                <i class="fa fa-chevron-down text-primary transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden p-6 pt-0 border-t border-neutral-200">
+                <p class="text-neutral-600">牙齿敏感通常表现为接触冷热食物时感到短暂的刺痛。处理方法包括：使用专门的抗敏感牙膏（通常需要连续使用2-4周才能见效）；避免极冷、极热、酸性或甜的食物；使用软毛牙刷，避免过度刷牙；定期进行口腔检查，排除其他牙科问题。如果敏感症状严重或持续，应咨询牙医，可能需要专业治疗。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 行动号召 -->
+    <section class="py-20 bg-primary relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1080/1200/800')] bg-cover bg-center"></div>
+      </div>
+      <div class="container mx-auto px-4 md:px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center text-white">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">开始您的口腔健康之旅</h2>
+          <p class="text-white/90 text-lg mb-10">健康的牙齿是一生的财富，从今天开始，养成良好的护牙习惯，定期检查，让笑容更加灿烂。</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#importance" class="bg-white text-primary font-medium px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-lg">
+              回顾要点
+            </a>
+            <a href="#" class="bg-secondary hover:bg-secondary/90 text-white font-medium px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-lg">
+              预约检查
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- 页脚 -->
+  <footer class="bg-neutral-800 text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-4 gap-10 mb-16">
+        <div>
+          <div class="flex items-center gap-2 mb-6">
+            <i class="fa fa-tooth text-primary text-2xl"></i>
+            <span class="text-xl font-bold">护牙指南</span>
+          </div>
+          <p class="text-neutral-400 mb-6">提供专业的口腔健康知识，帮助您和家人保持良好的口腔卫生，拥有健康美丽的笑容。</p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">快速链接</h4>
+          <ul class="space-y-3">
+            <li><a href="#importance" class="text-neutral-400 hover:text-primary transition-colors">为何重要</a></li>
+            <li><a href="#habits" class="text-neutral-400 hover:text-primary transition-colors">日常习惯</a></li>
+            <li><a href="#diet" class="text-neutral-400 hover:text-primary transition-colors">饮食建议</a></li>
+            <li><a href="#checkup" class="text-neutral-400 hover:text-primary transition-colors">定期检查</a></li>
+            <li><a href="#faq" class="text-neutral-400 hover:text-primary transition-colors">常见问题</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">相关资源</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-neutral-400 hover:text-primary transition-colors">儿童口腔护理</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-primary transition-colors">老年人口腔健康</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-primary transition-colors">牙齿美白指南</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-primary transition-colors">正畸治疗知识</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-primary transition-colors">口腔健康视频</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fa fa-map-marker text-primary mt-1"></i>
+              <span class="text-neutral-400">北京市朝阳区健康路88号口腔健康中心</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-phone text-primary"></i>
+              <span class="text-neutral-400">400-123-4567</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-envelope text-primary"></i>
+              <span class="text-neutral-400">info@toothcare.com</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-clock-o text-primary"></i>
+              <span class="text-neutral-400">周一至周日 9:00-21:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-neutral-700 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-neutral-500 text-sm mb-4 md:mb-0">© 2023 护牙指南. 保留所有权利.</p>
+          <div class="flex gap-6">
+            <a href="#" class="text-neutral-500 hover:text-primary text-sm transition-colors">隐私政策</a>
+            <a href="#" class="text-neutral-500 hover:text-primary text-sm transition-colors">使用条款</a>
+            <a href="#" class="text-neutral-500 hover:text-primary text-sm transition-colors">网站地图</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+  
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    
+    window.addEventListener('scroll', function() {
+      // 导航栏样式变化
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white', 'shadow-md', 'py-2');
+        navbar.classList.remove('bg-transparent', 'py-4');
+        
+        // 改变导航链接颜色
+        const navLinks = navbar.querySelectorAll('a:not(.mobile-link)');
+        navLinks.forEach(link => {
+          link.classList.remove('text-white');
+          link.classList.add('text-neutral-800');
         });
-    </script>
+        
+        // 显示返回顶部按钮
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md', 'py-2');
+        navbar.classList.add('bg-transparent', 'py-4');
+        
+        // 恢复导航链接颜色
+        const navLinks = navbar.querySelectorAll('a:not(.mobile-link)');
+        navLinks.forEach(link => {
+          link.classList.add('text-white');
+          link.classList.remove('text-neutral-800');
+        });
+        
+        // 隐藏返回顶部按钮
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+      
+      // 更新滚动指示器
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollIndicator.style.width = scrolled + "%";
+    });
+    
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // 关闭移动菜单（如果打开）
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          const icon = menuBtn.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // 返回顶部
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // FAQ 折叠功能
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        
+        // 切换当前FAQ的显示状态
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+        
+        // 关闭其他打开的FAQ
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            const otherContent = otherToggle.nextElementSibling;
+            const otherIcon = otherToggle.querySelector('i');
+            
+            if (!otherContent.classList.contains('hidden')) {
+              otherContent.classList.add('hidden');
+              otherIcon.classList.remove('rotate-180');
+            }
+          }
+        });
+      });
+    });
+    
+    // 口腔健康数据图表
+    const ctx = document.getElementById('dentalChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['龋齿患病率', '牙周疾病率', '定期检查率', '使用牙线率'],
+        datasets: [{
+          label: '成人比例 (%)',
+          data: [92, 85, 30, 8],
+          backgroundColor: [
+            'rgba(22, 93, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(54, 211, 153, 0.7)',
+            'rgba(153, 102, 255, 0.7)'
+          ],
+          borderColor: [
+            'rgba(22, 93, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(54, 211, 153, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+    
+    // 添加元素进入视口时的动画
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('section > div > div:not(.text-center)');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('opacity-100', 'translate-y-0');
+          element.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    };
+    
+    // 初始化元素样式
+    document.querySelectorAll('section > div > div:not(.text-center)').forEach(el => {
+      el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+    });
+    
+    // 初始检查和滚动时检查
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
 </body>
-
 </html>
